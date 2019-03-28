@@ -21,35 +21,47 @@ public class ChamadoArrayAdapter extends ArrayAdapter<Chamado> {
         Chamado chamadoDaVez = getItem(position);
         Fila filaDaVez = chamadoDaVez.getFila();
         LayoutInflater inflater = LayoutInflater.from(getContext());
+        ViewHolder vh = null;
         if (convertView == null){
             convertView = inflater.inflate(R.layout.list_item, parent,
                     false);
+            vh = new ViewHolder();
+            vh.filaIconImageView =
+                    convertView.findViewById(R.id.filaIconImageView);
+            vh.descricaoChamadoNaFilaTextView =
+
+                    convertView.findViewById(R.id.descricaoChamadoNaFilaTextView);
+            vh.statusChamadoNaFilaTextView =
+
+                    convertView.findViewById(R.id.statusChamadoNaFilaTextView);
+            vh.dataAberturaChamadoNaFilaTextView =
+
+                    convertView.findViewById(R.id.dataAberturaChamadoNaFilaTextView);
+            vh.dataFechamentoChamadoNaFilaTextView =
+
+                    convertView.findViewById(R.id.dataFechamentoChamadoNaFilaTextView);
+            convertView.setTag(vh);
         }
-        ImageView filaIconImageView =
-                convertView.findViewById(R.id.filaIconImageView);
-        TextView descricaoChamadoNaFilaTextView =
+        vh = (ViewHolder) convertView.getTag();
+        vh.filaIconImageView.setImageResource(filaDaVez.getIconId());
 
-                convertView.findViewById(R.id.descricaoChamadoNaFilaTextView);
-        TextView statusChamadoNaFilaTextView =
+        vh.descricaoChamadoNaFilaTextView.setText(chamadoDaVez.getDescricao(
+        ));
 
-                convertView.findViewById(R.id.statusChamadoNaFilaTextView);
-        TextView dataAberturaChamadoNaFilaTextView =
+        vh.statusChamadoNaFilaTextView.setText(chamadoDaVez.getStatus());
 
-                convertView.findViewById(R.id.dataAberturaChamadoNaFilaTextView);
-        TextView dataFechamentoChamadoNaFilaTextView =
-
-                convertView.findViewById(R.id.dataFechamentoChamadoNaFilaTextView);
-        filaIconImageView.setImageResource(filaDaVez.getIconId());
-
-        descricaoChamadoNaFilaTextView.setText(chamadoDaVez.getDescricao());
-        statusChamadoNaFilaTextView.setText(chamadoDaVez.getStatus());
-
-        dataAberturaChamadoNaFilaTextView.setText(DateHelper.format(chamadoDaVez.getDataAbertura()));
+        vh.dataAberturaChamadoNaFilaTextView.setText(DateHelper.format(chamadoDaVez.getDataAbertura()));
         if (chamadoDaVez.getDataFechamento() != null){
 
-            dataFechamentoChamadoNaFilaTextView.setText(DateHelper.format(chamadoDaVez.getDataFechamento()));
+            vh.dataFechamentoChamadoNaFilaTextView.setText(DateHelper.format(chamadoDaVez.getDataFechamento()));
         }
         return convertView;
     }
-
+    private class ViewHolder{
+        public ImageView filaIconImageView;
+        public TextView statusChamadoNaFilaTextView;
+        public TextView dataAberturaChamadoNaFilaTextView;
+        public TextView dataFechamentoChamadoNaFilaTextView;
+        public TextView descricaoChamadoNaFilaTextView;
+    }
 }
