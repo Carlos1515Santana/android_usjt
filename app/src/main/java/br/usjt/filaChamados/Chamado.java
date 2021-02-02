@@ -21,6 +21,9 @@ public class Chamado implements Serializable {
     public Fila getFila() {
         return fila;
     }
+
+    
+
     public void setFila(Fila fila) {
         this.fila = fila;
     }
