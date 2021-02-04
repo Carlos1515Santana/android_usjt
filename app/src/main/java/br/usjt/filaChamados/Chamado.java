@@ -21,6 +21,9 @@ public class Chamado implements Serializable {
     public Fila getFila() {
         return fila;
     }
+
+
+
     public void setFila(Fila fila) {
         this.fila = fila;
     }
@@ -45,6 +48,9 @@ public class Chamado implements Serializable {
     public String getStatus() {
         return status;
     }
+
+
+
     public void setStatus(String status) {
         this.status = status;
     }
